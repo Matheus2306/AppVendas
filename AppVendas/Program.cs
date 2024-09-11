@@ -1,7 +1,14 @@
+using AppVendas.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//adicionar o contexto do banco de dedos
+var strconexao = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AplicationDbContext>(options => options.UseSqlServer(strconexao));
 
 var app = builder.Build();
 
